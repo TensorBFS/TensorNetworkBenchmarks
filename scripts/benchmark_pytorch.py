@@ -5,7 +5,7 @@ from copy import deepcopy
 
 eqs = []
 allow_ascii = list(range(65, 90)) + list(range(97, 122))
-device = 'cuda:1'
+device = 'cuda:0'
 
 def read_tree(tree):
     if not tree['isleaf']:
@@ -64,8 +64,9 @@ repeat_times = 10
 torch.cuda.synchronize(device)
 t0 = time.time()
 for _ in range(repeat_times):
-    tensors = [torch.rand((2,) * len(i), dtype=torch.float32, device=device) for i in inputs_eq_copy]
-    pytorch_einsum(tensors, order, einsum_eqs)
+    tensors = [(0.5**0.4)*torch.ones((2,) * len(i), dtype=torch.float32, device=device) for i in inputs_eq_copy]
+    res = pytorch_einsum(tensors, order, einsum_eqs)
+    print(res)
 
 torch.cuda.synchronize(device)
 t1 = time.time()
