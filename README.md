@@ -9,7 +9,7 @@ $ cd scripts
 $ python benchmark_pytorch.py
 ```
 
-Timing ~0.27s
+Timing ~0.23s
 
 ## OMEinsum.jl
 
@@ -18,7 +18,7 @@ $ cd scripts
 $ JULIA_CUDA_USE_BINARYBUILDER=false julia benchmark_OMEinsum.jl
 ```
 
-Timing ~23s
+Timing ~1.0s
 
 
 ## Notes
