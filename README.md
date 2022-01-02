@@ -16,7 +16,7 @@ random_regular_eincode (generic function with 1 method)
 julia> code = random_regular_eincode(220, 3);
 
 julia> optcode_tree = optimize_code(code, uniformsize(code, 2), TreeSA(sc_target=29, βs=0.1:0.1:20,
-                                                                       ntrials=5, niters=30, sc_weight=2.0));
+                                                             ntrials=5, niters=30, sc_weight=2.0));
 
 julia> timespace_complexity(optcode_tree, uniformsize(code, 2))
 (33.17598124621909, 28.0)
