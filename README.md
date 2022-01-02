@@ -22,4 +22,4 @@ Result: ~23s
 
 
 ## Notes
-The python script is contributed by @Fanerst, please check the [original post](https://github.com/under-Peter/OMEinsum.jl/issues/133#issuecomment-1003662057).
+The python scripts are contributed by @Fanerst, please check the [original post](https://github.com/under-Peter/OMEinsum.jl/issues/133#issuecomment-1003662057).
