@@ -40,7 +40,7 @@ $ cd scripts
 $ JULIA_CUDA_USE_BINARYBUILDER=false julia benchmark_OMEinsum.jl
 ```
 
-Timing ~1.0s (on V100, it is ~1.2s)
+Timing ~1.0s (on V100, it is ~1.04s)
 
 
 ## Notes
