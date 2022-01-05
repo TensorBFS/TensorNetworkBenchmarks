@@ -1,6 +1,1063 @@
+## The LLVM code for permuting a 28 dimensional aray
+```llvm
+; PTX CompilerJob of kernel permutedims_kernel(CUDA.CuKernelContext, CuDeviceArray{Float32, 28, 1}, CuDeviceArray{Float32, 28, 1}, NTuple{28, Int64}) for sm_70
+;  @ /home/ubuntu/.julia/dev/GPUArrays/src/host/linalg.jl:208 within `permutedims_kernel`
+define ptx_kernel void @_Z29julia_permutedims_kernel_236815CuKernelContext13CuDeviceArrayI7Float32Li28ELi1EES0_IS1_Li28ELi1EE5TupleI5Int64S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_S3_E([1 x i64] %state, { i8 addrspace(1)*, i64, [28 x i64], i64 } %0, { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, [28 x i64] %2) local_unnamed_addr #3 {
+entry:
+  %.fca.0.extract90 = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %0, 0
+  %.fca.0.extract43 = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 0
+  %.fca.2.0.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 0
+  %.fca.2.1.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 1
+  %.fca.2.2.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 2
+  %.fca.2.3.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 3
+  %.fca.2.4.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 4
+  %.fca.2.5.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 5
+  %.fca.2.6.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 6
+  %.fca.2.7.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 7
+  %.fca.2.8.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 8
+  %.fca.2.9.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 9
+  %.fca.2.10.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 10
+  %.fca.2.11.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 11
+  %.fca.2.12.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 12
+  %.fca.2.13.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 13
+  %.fca.2.14.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 14
+  %.fca.2.15.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 15
+  %.fca.2.16.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 16
+  %.fca.2.17.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 17
+  %.fca.2.18.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 18
+  %.fca.2.19.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 19
+  %.fca.2.20.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 20
+  %.fca.2.21.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 21
+  %.fca.2.22.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 22
+  %.fca.2.23.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 23
+  %.fca.2.24.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 24
+  %.fca.2.25.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 25
+  %.fca.2.26.extract = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 2, 26
+  %.fca.3.extract45 = extractvalue { i8 addrspace(1)*, i64, [28 x i64], i64 } %1, 3
+  %.fca.0.extract = extractvalue [28 x i64] %2, 0
+  %.fca.1.extract = extractvalue [28 x i64] %2, 1
+  %.fca.2.extract = extractvalue [28 x i64] %2, 2
+  %.fca.3.extract = extractvalue [28 x i64] %2, 3
+  %.fca.4.extract = extractvalue [28 x i64] %2, 4
+  %.fca.5.extract = extractvalue [28 x i64] %2, 5
+  %.fca.6.extract = extractvalue [28 x i64] %2, 6
+  %.fca.7.extract = extractvalue [28 x i64] %2, 7
+  %.fca.8.extract = extractvalue [28 x i64] %2, 8
+  %.fca.9.extract = extractvalue [28 x i64] %2, 9
+  %.fca.10.extract = extractvalue [28 x i64] %2, 10
+  %.fca.11.extract = extractvalue [28 x i64] %2, 11
+  %.fca.12.extract = extractvalue [28 x i64] %2, 12
+  %.fca.13.extract = extractvalue [28 x i64] %2, 13
+  %.fca.14.extract = extractvalue [28 x i64] %2, 14
+  %.fca.15.extract = extractvalue [28 x i64] %2, 15
+  %.fca.16.extract = extractvalue [28 x i64] %2, 16
+  %.fca.17.extract = extractvalue [28 x i64] %2, 17
+  %.fca.18.extract = extractvalue [28 x i64] %2, 18
+  %.fca.19.extract = extractvalue [28 x i64] %2, 19
+  %.fca.20.extract = extractvalue [28 x i64] %2, 20
+  %.fca.21.extract = extractvalue [28 x i64] %2, 21
+  %.fca.22.extract = extractvalue [28 x i64] %2, 22
+  %.fca.23.extract = extractvalue [28 x i64] %2, 23
+  %.fca.24.extract = extractvalue [28 x i64] %2, 24
+  %.fca.25.extract = extractvalue [28 x i64] %2, 25
+  %.fca.26.extract = extractvalue [28 x i64] %2, 26
+  %.fca.27.extract = extractvalue [28 x i64] %2, 27
+;  @ /home/ubuntu/.julia/dev/GPUArrays/src/host/linalg.jl:210 within `permutedims_kernel`
+; ┌ @ /home/ubuntu/.julia/dev/GPUArrays/src/device/indexing.jl:66 within `macro expansion`
+; │┌ @ /home/ubuntu/.julia/dev/GPUArrays/src/device/indexing.jl:44 within `linear_index`
+; ││┌ @ /home/ubuntu/.julia/dev/GPUArrays/src/device/indexing.jl:20 within `global_index`
+; │││┌ @ /home/ubuntu/.julia/dev/CUDA/src/gpuarrays.jl:40 within `threadidx`
+; ││││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/intrinsics/indexing.jl:92 within `#threadIdx`
+; │││││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/intrinsics/indexing.jl:46 within `threadIdx_x`
+; ││││││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/intrinsics/indexing.jl:6 within `_index`
+; │││││││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/intrinsics/indexing.jl:6 within `macro expansion` @ /home/ubuntu/.julia/packages/LLVM/shuW4/src/interop/base.jl:45
+          %3 = call i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+; ││││││└└
+; ││││││┌ @ int.jl:87 within `+`
+         %4 = add nuw nsw i32 %3, 1
+; │││└└└└
+; │││┌ @ /home/ubuntu/.julia/dev/CUDA/src/gpuarrays.jl:38 within `blockidx`
+; ││││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/intrinsics/indexing.jl:78 within `#blockIdx`
+; │││││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/intrinsics/indexing.jl:56 within `blockIdx_x`
+; ││││││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/intrinsics/indexing.jl:6 within `_index`
+; │││││││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/intrinsics/indexing.jl:6 within `macro expansion` @ /home/ubuntu/.julia/packages/LLVM/shuW4/src/interop/base.jl:45
+          %5 = call i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+; │││└└└└└
+; │││┌ @ int.jl:982 within `-` @ int.jl:86
+      %6 = zext i32 %5 to i64
+; │││└
+; │││┌ @ /home/ubuntu/.julia/dev/CUDA/src/gpuarrays.jl:39 within `blockdim`
+; ││││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/intrinsics/indexing.jl:85 within `#blockDim`
+; │││││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/intrinsics/indexing.jl:51 within `blockDim_x`
+; ││││││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/intrinsics/indexing.jl:6 within `_index`
+; │││││││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/intrinsics/indexing.jl:6 within `macro expansion` @ /home/ubuntu/.julia/packages/LLVM/shuW4/src/interop/base.jl:45
+          %7 = call i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+; │││└└└└└
+; │││┌ @ int.jl:980 within `*`
+; ││││┌ @ int.jl:512 within `rem`
+       %8 = zext i32 %7 to i64
+; │││└└
+; │││┌ @ int.jl:982 within `*` @ int.jl:88
+      %9 = mul nuw nsw i64 %8, %6
+; │││└
+; │││┌ @ int.jl:980 within `+`
+; ││││┌ @ int.jl:512 within `rem`
+       %10 = zext i32 %4 to i64
+; │││└└
+; │││┌ @ int.jl:982 within `+` @ int.jl:87
+      %11 = add nuw nsw i64 %9, %10
+; └└└└
+; ┌ @ /home/ubuntu/.julia/dev/GPUArrays/src/device/indexing.jl:67 within `macro expansion`
+; │┌ @ operators.jl:378 within `>`
+; ││┌ @ int.jl:83 within `<`
+     %.not = icmp slt i64 %.fca.3.extract45, %11
+; │└└
+   br i1 %.not, label %L61, label %L62
+
+L61:                                              ; preds = %pass52, %entry
+   ret void
+
+L62:                                              ; preds = %entry
+; └
+;  @ /home/ubuntu/.julia/dev/GPUArrays/src/host/linalg.jl:211 within `permutedims_kernel`
+; ┌ @ multidimensional.jl:280 within `CartesianIndices`
+; │┌ @ abstractarray.jl:95 within `axes`
+; ││┌ @ tuple.jl:224 within `map`
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %12 = icmp sgt i64 %.fca.2.0.extract, 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %13 = icmp sgt i64 %.fca.2.1.extract, 0
+        %14 = select i1 %13, i64 %.fca.2.1.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %15 = icmp sgt i64 %.fca.2.2.extract, 0
+        %16 = select i1 %15, i64 %.fca.2.2.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %17 = icmp sgt i64 %.fca.2.3.extract, 0
+        %18 = select i1 %17, i64 %.fca.2.3.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %19 = icmp sgt i64 %.fca.2.4.extract, 0
+        %20 = select i1 %19, i64 %.fca.2.4.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %21 = icmp sgt i64 %.fca.2.5.extract, 0
+        %22 = select i1 %21, i64 %.fca.2.5.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %23 = icmp sgt i64 %.fca.2.6.extract, 0
+        %24 = select i1 %23, i64 %.fca.2.6.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %25 = icmp sgt i64 %.fca.2.7.extract, 0
+        %26 = select i1 %25, i64 %.fca.2.7.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %27 = icmp sgt i64 %.fca.2.8.extract, 0
+        %28 = select i1 %27, i64 %.fca.2.8.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %29 = icmp sgt i64 %.fca.2.9.extract, 0
+        %30 = select i1 %29, i64 %.fca.2.9.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %31 = icmp sgt i64 %.fca.2.10.extract, 0
+        %32 = select i1 %31, i64 %.fca.2.10.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %33 = icmp sgt i64 %.fca.2.11.extract, 0
+        %34 = select i1 %33, i64 %.fca.2.11.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %35 = icmp sgt i64 %.fca.2.12.extract, 0
+        %36 = select i1 %35, i64 %.fca.2.12.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %37 = icmp sgt i64 %.fca.2.13.extract, 0
+        %38 = select i1 %37, i64 %.fca.2.13.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %39 = icmp sgt i64 %.fca.2.14.extract, 0
+        %40 = select i1 %39, i64 %.fca.2.14.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %41 = icmp sgt i64 %.fca.2.15.extract, 0
+        %42 = select i1 %41, i64 %.fca.2.15.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %43 = icmp sgt i64 %.fca.2.16.extract, 0
+        %44 = select i1 %43, i64 %.fca.2.16.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %45 = icmp sgt i64 %.fca.2.17.extract, 0
+        %46 = select i1 %45, i64 %.fca.2.17.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %47 = icmp sgt i64 %.fca.2.18.extract, 0
+        %48 = select i1 %47, i64 %.fca.2.18.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %49 = icmp sgt i64 %.fca.2.19.extract, 0
+        %50 = select i1 %49, i64 %.fca.2.19.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %51 = icmp sgt i64 %.fca.2.20.extract, 0
+        %52 = select i1 %51, i64 %.fca.2.20.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %53 = icmp sgt i64 %.fca.2.21.extract, 0
+        %54 = select i1 %53, i64 %.fca.2.21.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %55 = icmp sgt i64 %.fca.2.22.extract, 0
+        %56 = select i1 %55, i64 %.fca.2.22.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %57 = icmp sgt i64 %.fca.2.23.extract, 0
+        %58 = select i1 %57, i64 %.fca.2.23.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %59 = icmp sgt i64 %.fca.2.24.extract, 0
+        %60 = select i1 %59, i64 %.fca.2.24.extract, i64 0
+; │││└└└
+; │││ @ tuple.jl:224 within `map` @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:224 @ tuple.jl:223
+; │││┌ @ range.jl:413 within `oneto`
+; ││││┌ @ range.jl:411 within `OneTo` @ range.jl:398
+; │││││┌ @ promotion.jl:479 within `max`
+        %61 = icmp sgt i64 %.fca.2.25.extract, 0
+        %62 = select i1 %61, i64 %.fca.2.25.extract, i64 0
+        %63 = icmp sgt i64 %.fca.2.26.extract, 0
+        %64 = select i1 %63, i64 %.fca.2.26.extract, i64 0
+; └└└└└└
+; ┌ @ abstractarray.jl:1218 within `getindex`
+; │┌ @ abstractarray.jl:1257 within `_getindex`
+; ││┌ @ abstractarray.jl:1264 within `_to_subscript_indices`
+; │││┌ @ abstractarray.jl:1286 within `_unsafe_ind2sub`
+; ││││┌ @ abstractarray.jl:2559 within `_ind2sub` @ abstractarray.jl:2597
+; │││││┌ @ int.jl:86 within `-`
+        %65 = add nsw i64 %11, -1
+; │││││└
+; │││││┌ @ abstractarray.jl:2610 within `_ind2sub_recurse`
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %12, label %pass, label %fail
+
+fail:                                             ; preds = %L62
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass:                                             ; preds = %L62
+          %66 = sdiv i64 %65, %.fca.2.0.extract
+; │││││└└└
+; │││││┌ @ abstractarray.jl:2611 within `_ind2sub_recurse`
+; ││││││┌ @ int.jl:88 within `*`
+         %67 = mul i64 %66, %.fca.2.0.extract
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %68 = sub i64 %65, %67
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %13, label %pass2, label %fail1
+
+fail1:                                            ; preds = %pass
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass2:                                            ; preds = %pass
+          %69 = sdiv i64 %66, %.fca.2.1.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %70 = mul i64 %69, %14
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %71 = sub i64 %66, %70
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %15, label %pass4, label %fail3
+
+fail3:                                            ; preds = %pass2
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass4:                                            ; preds = %pass2
+          %72 = sdiv i64 %69, %.fca.2.2.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %73 = mul i64 %72, %16
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %74 = sub i64 %69, %73
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %17, label %pass6, label %fail5
+
+fail5:                                            ; preds = %pass4
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass6:                                            ; preds = %pass4
+          %75 = sdiv i64 %72, %.fca.2.3.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %76 = mul i64 %75, %18
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %77 = sub i64 %72, %76
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %19, label %pass8, label %fail7
+
+fail7:                                            ; preds = %pass6
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass8:                                            ; preds = %pass6
+          %78 = sdiv i64 %75, %.fca.2.4.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %79 = mul i64 %78, %20
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %80 = sub i64 %75, %79
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %21, label %pass10, label %fail9
+
+fail9:                                            ; preds = %pass8
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass10:                                           ; preds = %pass8
+          %81 = sdiv i64 %78, %.fca.2.5.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %82 = mul i64 %81, %22
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %83 = sub i64 %78, %82
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %23, label %pass12, label %fail11
+
+fail11:                                           ; preds = %pass10
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass12:                                           ; preds = %pass10
+          %84 = sdiv i64 %81, %.fca.2.6.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %85 = mul i64 %84, %24
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %86 = sub i64 %81, %85
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %25, label %pass14, label %fail13
+
+fail13:                                           ; preds = %pass12
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass14:                                           ; preds = %pass12
+          %87 = sdiv i64 %84, %.fca.2.7.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %88 = mul i64 %87, %26
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %89 = sub i64 %84, %88
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %27, label %pass16, label %fail15
+
+fail15:                                           ; preds = %pass14
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass16:                                           ; preds = %pass14
+          %90 = sdiv i64 %87, %.fca.2.8.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %91 = mul i64 %90, %28
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %92 = sub i64 %87, %91
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %29, label %pass18, label %fail17
+
+fail17:                                           ; preds = %pass16
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass18:                                           ; preds = %pass16
+          %93 = sdiv i64 %90, %.fca.2.9.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %94 = mul i64 %93, %30
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %95 = sub i64 %90, %94
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %31, label %pass20, label %fail19
+
+fail19:                                           ; preds = %pass18
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass20:                                           ; preds = %pass18
+          %96 = sdiv i64 %93, %.fca.2.10.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %97 = mul i64 %96, %32
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %98 = sub i64 %93, %97
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %33, label %pass22, label %fail21
+
+fail21:                                           ; preds = %pass20
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass22:                                           ; preds = %pass20
+          %99 = sdiv i64 %96, %.fca.2.11.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %100 = mul i64 %99, %34
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %101 = sub i64 %96, %100
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %35, label %pass24, label %fail23
+
+fail23:                                           ; preds = %pass22
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass24:                                           ; preds = %pass22
+          %102 = sdiv i64 %99, %.fca.2.12.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %103 = mul i64 %102, %36
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %104 = sub i64 %99, %103
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %37, label %pass26, label %fail25
+
+fail25:                                           ; preds = %pass24
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass26:                                           ; preds = %pass24
+          %105 = sdiv i64 %102, %.fca.2.13.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %106 = mul i64 %105, %38
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %107 = sub i64 %102, %106
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %39, label %pass28, label %fail27
+
+fail27:                                           ; preds = %pass26
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass28:                                           ; preds = %pass26
+          %108 = sdiv i64 %105, %.fca.2.14.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %109 = mul i64 %108, %40
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %110 = sub i64 %105, %109
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %41, label %pass30, label %fail29
+
+fail29:                                           ; preds = %pass28
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass30:                                           ; preds = %pass28
+          %111 = sdiv i64 %108, %.fca.2.15.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %112 = mul i64 %111, %42
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %113 = sub i64 %108, %112
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %43, label %pass32, label %fail31
+
+fail31:                                           ; preds = %pass30
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass32:                                           ; preds = %pass30
+          %114 = sdiv i64 %111, %.fca.2.16.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %115 = mul i64 %114, %44
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %116 = sub i64 %111, %115
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %45, label %pass34, label %fail33
+
+fail33:                                           ; preds = %pass32
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass34:                                           ; preds = %pass32
+          %117 = sdiv i64 %114, %.fca.2.17.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %118 = mul i64 %117, %46
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %119 = sub i64 %114, %118
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %47, label %pass36, label %fail35
+
+fail35:                                           ; preds = %pass34
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass36:                                           ; preds = %pass34
+          %120 = sdiv i64 %117, %.fca.2.18.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %121 = mul i64 %120, %48
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %122 = sub i64 %117, %121
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %49, label %pass38, label %fail37
+
+fail37:                                           ; preds = %pass36
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass38:                                           ; preds = %pass36
+          %123 = sdiv i64 %120, %.fca.2.19.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %124 = mul i64 %123, %50
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %125 = sub i64 %120, %124
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %51, label %pass40, label %fail39
+
+fail39:                                           ; preds = %pass38
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass40:                                           ; preds = %pass38
+          %126 = sdiv i64 %123, %.fca.2.20.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %127 = mul i64 %126, %52
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %128 = sub i64 %123, %127
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %53, label %pass42, label %fail41
+
+fail41:                                           ; preds = %pass40
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass42:                                           ; preds = %pass40
+          %129 = sdiv i64 %126, %.fca.2.21.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %130 = mul i64 %129, %54
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %131 = sub i64 %126, %130
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %55, label %pass44, label %fail43
+
+fail43:                                           ; preds = %pass42
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass44:                                           ; preds = %pass42
+          %132 = sdiv i64 %129, %.fca.2.22.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %133 = mul i64 %132, %56
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %134 = sub i64 %129, %133
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %57, label %pass46, label %fail45
+
+fail45:                                           ; preds = %pass44
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass46:                                           ; preds = %pass44
+          %135 = sdiv i64 %132, %.fca.2.23.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %136 = mul i64 %135, %58
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %137 = sub i64 %132, %136
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %59, label %pass48, label %fail47
+
+fail47:                                           ; preds = %pass46
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass48:                                           ; preds = %pass46
+          %138 = sdiv i64 %135, %.fca.2.24.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %139 = mul i64 %138, %60
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %140 = sub i64 %135, %139
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %61, label %pass50, label %fail49
+
+fail49:                                           ; preds = %pass48
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass50:                                           ; preds = %pass48
+          %141 = sdiv i64 %138, %.fca.2.25.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          br i1 %63, label %pass52, label %fail51
+
+fail51:                                           ; preds = %pass50
+          call fastcc void @gpu_report_exception(i64 ptrtoint ([10 x i8]* @exception1 to i64))
+          call fastcc void @gpu_signal_exception([1 x i64] %state)
+          call void asm sideeffect "exit;", ""() #2
+          unreachable
+
+pass52:                                           ; preds = %pass50
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %142 = mul i64 %141, %62
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %143 = sub i64 %138, %142
+; ││││││└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2610
+; ││││││┌ @ abstractarray.jl:2617 within `_div`
+; │││││││┌ @ int.jl:284 within `div`
+          %144 = sdiv i64 %141, %.fca.2.26.extract
+; ││││││└└
+; ││││││ @ abstractarray.jl:2611 within `_ind2sub_recurse` @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611 @ abstractarray.jl:2611
+; ││││││┌ @ int.jl:88 within `*`
+         %145 = mul i64 %144, %64
+; ││││││└
+; ││││││┌ @ int.jl:86 within `-`
+         %146 = sub i64 %141, %145
+; └└└└└└└
+;  @ /home/ubuntu/.julia/dev/GPUArrays/src/host/linalg.jl:214 within `permutedims_kernel`
+; ┌ @ none within `map_index`
+; │┌ @ none within `macro expansion`
+; ││┌ @ int.jl:88 within `*`
+     %147 = mul i64 %68, %.fca.0.extract
+     %148 = mul i64 %71, %.fca.1.extract
+     %149 = mul i64 %74, %.fca.2.extract
+     %150 = mul i64 %77, %.fca.3.extract
+     %151 = mul i64 %80, %.fca.4.extract
+     %152 = mul i64 %83, %.fca.5.extract
+     %153 = mul i64 %86, %.fca.6.extract
+     %154 = mul i64 %89, %.fca.7.extract
+     %155 = mul i64 %92, %.fca.8.extract
+     %156 = mul i64 %95, %.fca.9.extract
+     %157 = mul i64 %98, %.fca.10.extract
+     %158 = mul i64 %101, %.fca.11.extract
+     %159 = mul i64 %104, %.fca.12.extract
+     %160 = mul i64 %107, %.fca.13.extract
+     %161 = mul i64 %110, %.fca.14.extract
+     %162 = mul i64 %113, %.fca.15.extract
+     %163 = mul i64 %116, %.fca.16.extract
+     %164 = mul i64 %119, %.fca.17.extract
+     %165 = mul i64 %122, %.fca.18.extract
+     %166 = mul i64 %125, %.fca.19.extract
+     %167 = mul i64 %128, %.fca.20.extract
+     %168 = mul i64 %131, %.fca.21.extract
+     %169 = mul i64 %134, %.fca.22.extract
+     %170 = mul i64 %137, %.fca.23.extract
+     %171 = mul i64 %140, %.fca.24.extract
+     %172 = mul i64 %143, %.fca.25.extract
+     %173 = mul i64 %146, %.fca.26.extract
+     %174 = mul i64 %144, %.fca.27.extract
+; └└└
+;  @ /home/ubuntu/.julia/dev/GPUArrays/src/host/linalg.jl:215 within `permutedims_kernel`
+; ┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/array.jl:192 within `getindex`
+; │┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/array.jl:111 within `arrayref`
+; ││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/array.jl:119 within `arrayref_bits`
+; │││┌ @ /home/ubuntu/.julia/packages/LLVM/shuW4/src/interop/pointer.jl:81 within `unsafe_load`
+; ││││┌ @ /home/ubuntu/.julia/packages/LLVM/shuW4/src/interop/pointer.jl:9 within `pointerref`
+; │││││┌ @ /home/ubuntu/.julia/packages/LLVM/shuW4/src/interop/pointer.jl:9 within `macro expansion` @ /home/ubuntu/.julia/packages/LLVM/shuW4/src/interop/base.jl:45
+        %175 = bitcast i8 addrspace(1)* %.fca.0.extract43 to float addrspace(1)*
+        %176 = getelementptr inbounds float, float addrspace(1)* %175, i64 %65
+        %177 = load float, float addrspace(1)* %176, align 4
+; └└└└└└
+;  @ /home/ubuntu/.julia/dev/GPUArrays/src/host/linalg.jl:214 within `permutedims_kernel`
+; ┌ @ none within `map_index`
+; │┌ @ none within `macro expansion`
+; ││┌ @ operators.jl:655 within `+`
+; │││┌ @ operators.jl:612 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %178 = add i64 %148, %147
+; │││└└
+; │││┌ @ operators.jl:613 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %179 = add i64 %178, %149
+; │││└└
+; │││┌ @ operators.jl:614 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %180 = add i64 %179, %150
+; │││└└
+; │││┌ @ operators.jl:615 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %181 = add i64 %180, %151
+; │││└└
+; │││┌ @ operators.jl:616 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %182 = add i64 %181, %152
+; │││└└
+; │││┌ @ operators.jl:617 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %183 = add i64 %182, %153
+; │││└└
+; │││┌ @ operators.jl:618 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %184 = add i64 %183, %154
+; │││└└
+; │││┌ @ operators.jl:619 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %185 = add i64 %184, %155
+; │││└└
+; │││┌ @ operators.jl:620 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %186 = add i64 %185, %156
+; │││└└
+; │││┌ @ operators.jl:621 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %187 = add i64 %186, %157
+; │││└└
+; │││┌ @ operators.jl:622 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %188 = add i64 %187, %158
+; │││└└
+; │││┌ @ operators.jl:623 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %189 = add i64 %188, %159
+; │││└└
+; │││┌ @ operators.jl:624 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %190 = add i64 %189, %160
+; │││└└
+; │││┌ @ operators.jl:625 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %191 = add i64 %190, %161
+; │││└└
+; │││┌ @ operators.jl:626 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %192 = add i64 %191, %162
+; │││└└
+; │││┌ @ operators.jl:627 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %193 = add i64 %192, %163
+; │││└└
+; │││┌ @ operators.jl:628 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %194 = add i64 %193, %164
+; │││└└
+; │││┌ @ operators.jl:629 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %195 = add i64 %194, %165
+; │││└└
+; │││┌ @ operators.jl:630 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %196 = add i64 %195, %166
+; │││└└
+; │││┌ @ operators.jl:631 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %197 = add i64 %196, %167
+; │││└└
+; │││┌ @ operators.jl:632 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %198 = add i64 %197, %168
+; │││└└
+; │││┌ @ operators.jl:633 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %199 = add i64 %198, %169
+; │││└└
+; │││┌ @ operators.jl:634 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %200 = add i64 %199, %170
+; │││└└
+; │││┌ @ operators.jl:635 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %201 = add i64 %200, %171
+; │││└└
+; │││┌ @ operators.jl:636 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %202 = add i64 %201, %172
+; │││└└
+; │││┌ @ operators.jl:637 within `afoldl`
+; ││││┌ @ int.jl:87 within `+`
+       %203 = add i64 %202, %174
+; └└└└└
+;  @ /home/ubuntu/.julia/dev/GPUArrays/src/host/linalg.jl:215 within `permutedims_kernel`
+; ┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/array.jl:194 within `setindex!`
+; │┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/array.jl:153 within `arrayset`
+; ││┌ @ /home/ubuntu/.julia/dev/CUDA/src/device/array.jl:162 within `arrayset_bits`
+; │││┌ @ /home/ubuntu/.julia/packages/LLVM/shuW4/src/interop/pointer.jl:84 within `unsafe_store!`
+; ││││┌ @ /home/ubuntu/.julia/packages/LLVM/shuW4/src/interop/pointer.jl:44 within `pointerset`
+; │││││┌ @ /home/ubuntu/.julia/packages/LLVM/shuW4/src/interop/pointer.jl:44 within `macro expansion` @ /home/ubuntu/.julia/packages/LLVM/shuW4/src/interop/base.jl:45
+; ││││││┌ @ int.jl:86 within `-`
+         %204 = add i64 %203, %173
+; ││││││└
+        %205 = bitcast i8 addrspace(1)* %.fca.0.extract90 to float addrspace(1)*
+        %206 = getelementptr inbounds float, float addrspace(1)* %205, i64 %204
+        store float %177, float addrspace(1)* %206, align 4
+; │└└└└└
+   br label %L61
+; └
+}
+```
+
 ## The PTX code for permuting a 28 dimensional array
 
-```julia
+```
 // PTX CompilerJob of kernel permutedims_kernel(CUDA.CuKernelContext, CuDeviceArray{Float32, 28, 1}, CuDeviceArray{Float32, 28, 1}, NTuple{28, Int64}) for sm_70
 
 //
