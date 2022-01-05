@@ -1,4 +1,4 @@
-import json
+import json, math
 import torch
 import time
 from copy import deepcopy
@@ -29,12 +29,13 @@ with open("tensornetwork.json", 'r') as f:
     optcode = json.load(f)
 
 torch.cuda.synchronize(device)
-t0 = time.time()
+mintime = math.inf
 for _ in range(repeat_times):
+    t0 = time.time()
     tensors = [(0.5**0.4)*torch.ones((2,) * len(ix), dtype=torch.float32, device=device) for ix in optcode["inputs"]]
     res = contract(optcode, tensors)
+    torch.cuda.synchronize(device)
+    t1 = time.time()
+    mintime = min(mintime, t1-t0)
     print(res)
-
-torch.cuda.synchronize(device)
-t1 = time.time()
-print((t1 - t0) / repeat_times)
+print("minimum time = ", mintime)
