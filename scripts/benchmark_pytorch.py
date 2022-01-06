@@ -2,7 +2,7 @@ import json, math
 import torch
 import time
 from copy import deepcopy
-import pdb
+import fire
 
 def myeinsum(ixs, iy, tensors):
     uniquelabels = list(set(sum(ixs, start=[]) + iy))
@@ -22,20 +22,38 @@ def contract(tree:dict, inputs):
     labels = torch.unique(torch.tensor(sum(tree["inputs"], start=[]) + tree["output"]))
     return contract_recur(tree['tree'], inputs)
 
-repeat_times = 10
-device = 'cuda:0'
+class CLI(object):
+    def gpu(self, repeat_times = 10, tensornetwork="tensornetwork_permutation_optimized.json", deviceid:int=0):
+        device = 'cuda:%d'%deviceid
+        with open(tensornetwork, 'r') as f:
+            optcode = json.load(f)
 
-with open("tensornetwork_permutation_optimized.json", 'r') as f:
-    optcode = json.load(f)
+        torch.cuda.synchronize(device)
+        mintime = math.inf
+        for _ in range(repeat_times):
+            t0 = time.time()
+            tensors = [(0.5**0.4)*torch.ones((2,) * len(ix), dtype=torch.float32, device=device) for ix in optcode["inputs"]]
+            res = contract(optcode, tensors)
+            torch.cuda.synchronize(device)
+            t1 = time.time()
+            mintime = min(mintime, t1-t0)
+            print(res)
+        print("minimum time = ", mintime)
 
-torch.cuda.synchronize(device)
-mintime = math.inf
-for _ in range(repeat_times):
-    t0 = time.time()
-    tensors = [(0.5**0.4)*torch.ones((2,) * len(ix), dtype=torch.float32, device=device) for ix in optcode["inputs"]]
-    res = contract(optcode, tensors)
-    torch.cuda.synchronize(device)
-    t1 = time.time()
-    mintime = min(mintime, t1-t0)
-    print(res)
-print("minimum time = ", mintime)
+    def cpu(self, repeat_times = 3, tensornetwork="tensornetwork_permutation_optimized.json", nthreads=1):
+        device = 'cpu'
+        torch.set_num_threads(nthreads)
+        with open(tensornetwork, 'r') as f:
+            optcode = json.load(f)
+
+        mintime = math.inf
+        for _ in range(repeat_times):
+            t0 = time.time()
+            tensors = [(0.5**0.4)*torch.ones((2,) * len(ix), dtype=torch.float32, device=device) for ix in optcode["inputs"]]
+            res = contract(optcode, tensors)
+            t1 = time.time()
+            mintime = min(mintime, t1-t0)
+            print(res)
+        print("minimum time = ", mintime)
+
+fire.Fire(CLI())

@@ -1,0 +1,16 @@
+[deps]
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
+Comonicon = "863f3e99-da2a-4334-8734-de3dacbe5542"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+MKL = "33e6dc65-8f57-5167-99aa-e5a354878fb2"
+OMEinsum = "ebe7aa44-baf0-506c-a96f-8464559b3922"
+OMEinsumContractionOrders = "6f22d1fd-8eed-4bb7-9776-e7d684900715"
+
+[compat]
+BenchmarkTools = "1.2"
+CUDA = "3.6"
+Comonicon = "0.11"
+MKL = "0.4"
+OMEinsum = "0.6"
+OMEinsumContractionOrders = "0.6"
