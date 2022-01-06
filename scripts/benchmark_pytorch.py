@@ -25,7 +25,7 @@ def contract(tree:dict, inputs):
 repeat_times = 10
 device = 'cuda:0'
 
-with open("tensornetwork.json", 'r') as f:
+with open("tensornetwork_permutation_optimized.json", 'r') as f:
     optcode = json.load(f)
 
 torch.cuda.synchronize(device)
