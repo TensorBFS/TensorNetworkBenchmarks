@@ -23,7 +23,7 @@ julia> optcode_tree = optimize_code(code, uniformsize(code, 2), TreeSA(sc_target
 julia> timespace_complexity(optcode_tree, uniformsize(code, 2))
 (33.17598124621909, 28.0)
 
-julia> writejson("test.json", optcode_tree)
+julia> writejson("tensornetwork_permutation_optimized.json", optcode_tree)
 ```
 
 ## pytorch
@@ -34,7 +34,7 @@ $ python benchmark_pytorch.py
 ```
 
 #### Timing
-* on V100, the minimum time is ~0.14s
+* on V100, the minimum time is ~0.13s
 
 ## OMEinsum.jl
 
@@ -44,7 +44,7 @@ $ JULIA_CUDA_USE_BINARYBUILDER=false julia benchmark_OMEinsum.jl
 ```
 
 #### Timing
-* on V100, the minimum time is ~0.39s
+* on V100, the minimum time is ~0.33s
 
 
 ## Notes
