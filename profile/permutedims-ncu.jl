@@ -1,4 +1,4 @@
-using CUDA, BenchmarkTools, Random
+using CUDA, BenchmarkTools, Random, OMEinsum
 
 let D = 28
     a = CUDA.randn(fill(2, D)...)
