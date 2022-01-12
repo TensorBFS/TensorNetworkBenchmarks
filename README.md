@@ -45,6 +45,8 @@ $ python benchmark_pytorch.py gpu
 ```
 
 #### Timing
+
+* on A100, the minimum time is ~0.12s
 * on V100, the minimum time is ~0.13s
 * on CPU (MKL backend, single thread), it is 38.87s
 
@@ -56,6 +58,7 @@ $ JULIA_CUDA_USE_BINARYBUILDER=false julia --project benchmark_OMEinsum.jl gpu
 ```
 
 #### Timing
+* on A100, the minimum time is ~0.22s
 * on V100, the minimum time is ~0.33s
 * on CPU (MKL backend, single thread), it is 32.67s
 
