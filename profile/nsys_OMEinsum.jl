@@ -1,5 +1,6 @@
-using OMEinsum, OMEinsumContractionOrders
 using CUDA, BenchmarkTools
+using OMEinsum, OMEinsumContractionOrders
+CUDA.attribute!(memory_pool(device()), CUDA.MEMPOOL_ATTR_RELEASE_THRESHOLD, UInt64(2*2^30))
 
 optcode_loaded = readjson(joinpath(dirname(@__DIR__), "scripts", "tensornetwork_permutation_optimized.json"))
 @show timespacereadwrite_complexity(optcode_loaded, uniformsize(optcode_loaded, 2))

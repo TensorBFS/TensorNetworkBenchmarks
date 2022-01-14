@@ -3,6 +3,8 @@ using CUDA, BenchmarkTools
 using MKL
 using Comonicon
 using LinearAlgebra
+#CUDA.attribute!(memory_pool(device()), CUDA.MEMPOOL_ATTR_RELEASE_THRESHOLD, UInt64(2*2^30))
+CUDA.attribute!(memory_pool(device()), CUDA.MEMPOOL_ATTR_RELEASE_THRESHOLD, typemax(UInt64))
 
 @cast function gpu(deviceid::Int=0, tensornetwork::String="tensornetwork_permutation_optimized.json")
     CUDA.device!(deviceid)
