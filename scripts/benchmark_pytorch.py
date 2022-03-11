@@ -53,7 +53,8 @@ class CLI(object):
         # warm up
         for _ in range(10):
             res = contract(optcode, tensors)
-        ta = time.time()
+
+        # min time
         mintime = math.inf
         for _ in range(repeat_times):
             t0 = time.time()
@@ -61,8 +62,13 @@ class CLI(object):
             t1 = time.time()
             mintime = min(mintime, t1-t0)
             print(res)
-        total = time.time() - ta
         print("minimum time = \n", mintime)
+
+        ta = time.time()
+        for _ in range(repeat_times):
+            res = contract(optcode, tensors)
+            print(res)
+        total = time.time() - ta
         print("total time = ", total)
 
     def profilegpu(self, repeat_times = 10, tensornetwork="tensornetwork_permutation_optimized.json", deviceid:int=0):

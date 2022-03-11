@@ -55,13 +55,13 @@ $ python benchmark_pytorch.py cpu
 
 ```bash
 $ cd scripts
-$ CU_MEMPOOL_ATTR_RELEASE_THRESHOLD=9223372036854775807 JULIA_NUM_THREADS=1 JULIA_CUDA_USE_BINARYBUILDER=false julia benchmark_OMEinsum.jl gpu
-$ JULIA_NUM_THREADS=1 JULIA_CUDA_USE_BINARYBUILDER=false julia benchmark_OMEinsum.jl gpu
+$ JULIA_NUM_THREADS=1 JULIA_CUDA_USE_BINARYBUILDER=false julia --project benchmark_OMEinsum.jl gpu
+$ JULIA_NUM_THREADS=1 JULIA_CUDA_USE_BINARYBUILDER=false julia --project benchmark_OMEinsum.jl cpu
 ```
 
 #### Timing
 * on A100, the minimum time is ~0.22s (needs update)
-* on V100, the minimum time is ~0.21s, 10 execusions take ~3.75s
+* on V100, the minimum time is ~0.13s, 10 execusions take ~1.39s
 * on CPU (MKL backend, single thread), it is 23.05s
 
 Note: The Julia garbadge collection time is avoided.
