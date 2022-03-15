@@ -37,6 +37,8 @@ $ cd scripts
 $ julia --project -e 'using Pkg; Pkg.instantiate()'
 ```
 
+(NOTE: if you want to update your local environment, just run `julia --project -e 'using Pkg; Pkg.update()`)
+
 ## pytorch
 
 ```bash
