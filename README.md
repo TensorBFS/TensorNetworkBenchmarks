@@ -49,7 +49,7 @@ $ python benchmark_pytorch.py cpu
 
 #### Timing
 
-* on A100, the minimum time is ~0.12s (needs update)
+* on A100, the minimum time is ~0.13s, 10 execusions take ~1.32s
 * on V100, the minimum time is ~0.12s, 10 execusions take ~1.76s
 * on CPU (MKL backend, single thread), it is 38.87s (maybe MKL is not set properly?)
 
@@ -62,7 +62,7 @@ $ JULIA_NUM_THREADS=1 JULIA_CUDA_USE_BINARYBUILDER=false julia --project benchma
 ```
 
 #### Timing
-* on A100, the minimum time is ~0.22s (needs update)
+* on A100, the minimum time is ~0.16s, 10 execusions take ~2.25s
 * on V100, the minimum time is ~0.13s, 10 execusions take ~1.39s
 * on CPU (MKL backend, single thread), it is 23.05s
 
