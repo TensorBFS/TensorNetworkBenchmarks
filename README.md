@@ -49,7 +49,7 @@ $ python benchmark_pytorch.py cpu
 
 #### Timing
 
-* on A100, the minimum time is ~0.13s, 10 execusions take ~1.32s
+* on A100, the minimum time is ~0.12s, 10 execusions take ~1.35s
 * on V100, the minimum time is ~0.12s, 10 execusions take ~1.76s
 * on CPU (MKL backend, single thread), it is 38.87s (maybe MKL is not set properly?)
 
