@@ -5,7 +5,7 @@ using Comonicon
 using LinearAlgebra
 #CUDA.attribute!(memory_pool(device()), CUDA.MEMPOOL_ATTR_RELEASE_THRESHOLD, UInt64(2*2^30))
 
-@cast function gpu(deviceid::Int=0, tensornetwork::String="tensornetwork_permutation_optimized.json", cudaversion::String="")
+@cast function gpu(deviceid::Int=0, tensornetwork::String="tensornetwork_permutation_optimized.json"; cudaversion::String="")
     !isempty(cudaversion) && CUDA.set_runtime_version!(cudaversion)
     CUDA.attribute!(memory_pool(device()), CUDA.MEMPOOL_ATTR_RELEASE_THRESHOLD, typemax(UInt64))
     CUDA.device!(deviceid)
