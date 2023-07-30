@@ -57,8 +57,8 @@ $ python benchmark_pytorch.py cpu
 
 ```bash
 $ cd scripts
-$ JULIA_NUM_THREADS=1 JULIA_CUDA_USE_BINARYBUILDER=false julia --project benchmark_OMEinsum.jl gpu
-$ JULIA_NUM_THREADS=1 JULIA_CUDA_USE_BINARYBUILDER=false julia --project benchmark_OMEinsum.jl cpu
+$ JULIA_NUM_THREADS=1 julia --project benchmark_OMEinsum.jl gpu
+$ JULIA_NUM_THREADS=1 julia --project benchmark_OMEinsum.jl cpu
 ```
 
 #### Timing

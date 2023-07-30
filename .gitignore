@@ -1,3 +1,7 @@
 *.qdrep
 *.ncu-rep
 Manifest.toml
+scripts/*.err
+scripts/*.out
+scripts/LocalPreferences.toml
+scripts/julia-gpu-lsf.job
