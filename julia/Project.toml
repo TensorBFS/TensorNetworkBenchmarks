@@ -2,16 +2,20 @@
 BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
 CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
 Comonicon = "863f3e99-da2a-4334-8734-de3dacbe5542"
+cuTENSOR = "011b41b2-24ef-40a8-b3eb-fa098493e9e1"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 MKL = "33e6dc65-8f57-5167-99aa-e5a354878fb2"
 OMEinsum = "ebe7aa44-baf0-506c-a96f-8464559b3922"
 
 [compat]
-BenchmarkTools = "1.2"
-CUDA = "4"
+BenchmarkTools = "1"
+CUDA = "5"
 Comonicon = "1"
-MKL = "0.6"
-OMEinsum = "0.7"
+JSON = "1"
+MKL = "0.7, 0.8, 0.9"
+OMEinsum = "0.9"
 
 [extras]
 CUDA_Runtime_jll = "76a88914-d11a-5bdc-97e0-2f5a05c973a2"

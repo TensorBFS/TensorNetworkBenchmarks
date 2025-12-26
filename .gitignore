@@ -1,6 +1,10 @@
 *.qdrep
 *.ncu-rep
-Manifest.toml
-scripts/*.err
-scripts/*.out
-scripts/LocalPreferences.toml
+julia/Manifest.toml
+julia/*.err
+julia/*.out
+julia/LocalPreferences.toml
+python/.venv/
+results/
+report.pdf
+figures/*.svg
