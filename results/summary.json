@@ -1,0 +1,185 @@
+{
+  "generated_at": "2025-12-26T08:41:59",
+  "num_results": 5,
+  "results": [
+    {
+      "backend": "MKL",
+      "device": "cpu",
+      "framework": "OMEinsum",
+      "gpu_info": null,
+      "result": 0.9999936,
+      "repeat_times": 1,
+      "nthreads": 1,
+      "tensornetwork": "../data/tensornetwork_permutation_optimized.json",
+      "cpu_info": {
+        "cpu_name": "icelake-server",
+        "kernel": "Linux",
+        "machine": "x86_64-linux-gnu",
+        "word_size": 64,
+        "cpu_threads": 128
+      },
+      "avg_time": 14.670366048812866,
+      "total_time": 14.670989036560059,
+      "all_times": [
+        14.670366048812866
+      ],
+      "min_time": 14.670366048812866,
+      "timestamp": "2025-12-26T08:38:30",
+      "contraction_complexity": {
+        "rwc": 32.09136076914558,
+        "tc": 33.17598124621909,
+        "sc": 28.0
+      }
+    },
+    {
+      "backend": "cublas",
+      "device": "gpu",
+      "framework": "OMEinsum",
+      "gpu_info": {
+        "name": "NVIDIA A800 80GB PCIe",
+        "cuda_version": "13.0.0",
+        "total_memory_gb": 79.1510009765625,
+        "device_id": 1,
+        "capability": "8.0.0"
+      },
+      "result": 0.9999922,
+      "repeat_times": 10,
+      "deviceid": 1,
+      "tensornetwork": "../data/tensornetwork_permutation_optimized.json",
+      "cpu_info": {
+        "cpu_name": "icelake-server",
+        "kernel": "Linux",
+        "machine": "x86_64-linux-gnu",
+        "word_size": 64,
+        "cpu_threads": 128
+      },
+      "avg_time": 0.2453214406967163,
+      "total_time": 2.5285420417785645,
+      "all_times": [
+        0.23852109909057617,
+        0.23827505111694336,
+        0.2406928539276123,
+        0.25060200691223145,
+        0.24602890014648438,
+        0.24591612815856934,
+        0.24593520164489746,
+        0.24912500381469727,
+        0.24606108665466309,
+        0.2520570755004883
+      ],
+      "min_time": 0.23827505111694336,
+      "timestamp": "2025-12-26T08:36:14",
+      "contraction_complexity": {
+        "rwc": 32.09136076914558,
+        "tc": 33.17598124621909,
+        "sc": 28.0
+      }
+    },
+    {
+      "backend": "cutensor",
+      "device": "gpu",
+      "framework": "OMEinsum",
+      "gpu_info": {
+        "name": "NVIDIA A800 80GB PCIe",
+        "cuda_version": "13.0.0",
+        "total_memory_gb": 79.1510009765625,
+        "device_id": 1,
+        "capability": "8.0.0"
+      },
+      "result": 0.9999914,
+      "repeat_times": 10,
+      "deviceid": 1,
+      "tensornetwork": "../data/tensornetwork_permutation_optimized.json",
+      "cpu_info": {
+        "cpu_name": "icelake-server",
+        "kernel": "Linux",
+        "machine": "x86_64-linux-gnu",
+        "word_size": 64,
+        "cpu_threads": 128
+      },
+      "avg_time": 0.05733370780944824,
+      "total_time": 0.6061410903930664,
+      "all_times": [
+        0.057775020599365234,
+        0.057272911071777344,
+        0.05742502212524414,
+        0.05730605125427246,
+        0.05726003646850586,
+        0.05727696418762207,
+        0.057299137115478516,
+        0.05725598335266113,
+        0.05726194381713867,
+        0.05720400810241699
+      ],
+      "min_time": 0.05720400810241699,
+      "timestamp": "2025-12-26T08:34:45",
+      "contraction_complexity": {
+        "rwc": 32.09136076914558,
+        "tc": 33.17598124621909,
+        "sc": 28.0
+      }
+    },
+    {
+      "framework": "pytorch",
+      "device": "cpu",
+      "backend": "cpu",
+      "nthreads": 1,
+      "tensornetwork": "../data/tensornetwork_permutation_optimized.json",
+      "repeat_times": 1,
+      "min_time": 17.24198079109192,
+      "avg_time": 17.24198079109192,
+      "total_time": 17.241998434066772,
+      "all_times": [
+        17.24198079109192
+      ],
+      "result": 0.999993622303009,
+      "timestamp": "2025-12-26T08:40:10.793527",
+      "cpu_info": {
+        "processor": "x86_64",
+        "machine": "x86_64",
+        "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.35",
+        "cpu_count": 128
+      },
+      "gpu_info": null
+    },
+    {
+      "framework": "pytorch",
+      "device": "gpu",
+      "backend": "cuda",
+      "deviceid": 1,
+      "tensornetwork": "../data/tensornetwork_permutation_optimized.json",
+      "repeat_times": 10,
+      "min_time": 0.10692071914672852,
+      "avg_time": 0.10709919929504394,
+      "total_time": 1.0710220336914062,
+      "all_times": [
+        0.10703420639038086,
+        0.10815691947937012,
+        0.10701799392700195,
+        0.10707783699035645,
+        0.10695719718933105,
+        0.10692071914672852,
+        0.10697793960571289,
+        0.10694527626037598,
+        0.10697770118713379,
+        0.10692620277404785
+      ],
+      "result": 0.9999980330467224,
+      "timestamp": "2025-12-26T08:40:02.662113",
+      "cpu_info": {
+        "processor": "x86_64",
+        "machine": "x86_64",
+        "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.35",
+        "cpu_count": 128
+      },
+      "gpu_info": {
+        "name": "NVIDIA A800 80GB PCIe",
+        "compute_capability": "8.0",
+        "total_memory_gb": 79.1510009765625,
+        "multiprocessor_count": 108,
+        "cuda_version": "12.8",
+        "cudnn_version": 91002
+      }
+    }
+  ]
+}

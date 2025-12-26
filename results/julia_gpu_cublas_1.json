@@ -1,0 +1,44 @@
+{
+  "backend": "cublas",
+  "device": "gpu",
+  "framework": "OMEinsum",
+  "gpu_info": {
+    "name": "NVIDIA A800 80GB PCIe",
+    "cuda_version": "13.0.0",
+    "total_memory_gb": 79.1510009765625,
+    "device_id": 1,
+    "capability": "8.0.0"
+  },
+  "result": 0.9999922,
+  "repeat_times": 10,
+  "deviceid": 1,
+  "tensornetwork": "../data/tensornetwork_permutation_optimized.json",
+  "cpu_info": {
+    "cpu_name": "icelake-server",
+    "kernel": "Linux",
+    "machine": "x86_64-linux-gnu",
+    "word_size": 64,
+    "cpu_threads": 128
+  },
+  "avg_time": 0.2453214406967163,
+  "total_time": 2.5285420417785645,
+  "all_times": [
+    0.23852109909057617,
+    0.23827505111694336,
+    0.2406928539276123,
+    0.25060200691223145,
+    0.24602890014648438,
+    0.24591612815856934,
+    0.24593520164489746,
+    0.24912500381469727,
+    0.24606108665466309,
+    0.2520570755004883
+  ],
+  "min_time": 0.23827505111694336,
+  "timestamp": "2025-12-26T08:36:14",
+  "contraction_complexity": {
+    "rwc": 32.09136076914558,
+    "tc": 33.17598124621909,
+    "sc": 28.0
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "framework": "pytorch",
+  "device": "cpu",
+  "backend": "cpu",
+  "nthreads": 1,
+  "tensornetwork": "../data/tensornetwork_permutation_optimized.json",
+  "repeat_times": 1,
+  "min_time": 17.24198079109192,
+  "avg_time": 17.24198079109192,
+  "total_time": 17.241998434066772,
+  "all_times": [
+    17.24198079109192
+  ],
+  "result": 0.999993622303009,
+  "timestamp": "2025-12-26T08:40:10.793527",
+  "cpu_info": {
+    "processor": "x86_64",
+    "machine": "x86_64",
+    "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.35",
+    "cpu_count": 128
+  },
+  "gpu_info": null
+}
