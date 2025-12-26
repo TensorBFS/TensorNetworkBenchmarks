@@ -1,0 +1,29 @@
+{
+  "backend": "MKL",
+  "device": "cpu",
+  "framework": "OMEinsum",
+  "gpu_info": null,
+  "result": 0.9999936,
+  "repeat_times": 1,
+  "nthreads": 1,
+  "tensornetwork": "../data/tensornetwork_permutation_optimized.json",
+  "cpu_info": {
+    "cpu_name": "icelake-server",
+    "kernel": "Linux",
+    "machine": "x86_64-linux-gnu",
+    "word_size": 64,
+    "cpu_threads": 128
+  },
+  "avg_time": 14.670366048812866,
+  "total_time": 14.670989036560059,
+  "all_times": [
+    14.670366048812866
+  ],
+  "min_time": 14.670366048812866,
+  "timestamp": "2025-12-26T08:38:30",
+  "contraction_complexity": {
+    "rwc": 32.09136076914558,
+    "tc": 33.17598124621909,
+    "sc": 28.0
+  }
+}

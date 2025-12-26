@@ -92,7 +92,7 @@ run-julia-cutensor: $(RESULTS_DIR)
 
 summary: $(RESULTS_DIR)
 	@echo "Generating summary from all results..."
-	cd $(JULIA_DIR) && $(JL) -e 'include("runner.jl"); generate_summary()'
+	cd $(PYTHON_DIR) && uv run generate_summary.py
 
 report: summary
 	@echo "Generating PDF report with Typst..."

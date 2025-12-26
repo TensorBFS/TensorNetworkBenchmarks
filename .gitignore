@@ -5,6 +5,7 @@ julia/*.err
 julia/*.out
 julia/LocalPreferences.toml
 python/.venv/
-results/
+# results/
 report.pdf
 figures/*.svg
+.vscode/

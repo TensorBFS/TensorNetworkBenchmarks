@@ -41,12 +41,14 @@ function get_gpu_info(deviceid::Int=0)
     try
         CUDA.device!(deviceid)
         dev = CUDA.device()
+        # Get CUDA version safely
+        cuda_version = string(CUDA.toolkit_version)
         return Dict(
             "name" => CUDA.name(dev),
             "capability" => string(CUDA.capability(dev)),
-            "total_memory_gb" => CUDA.total_memory(dev) / (1024^3),
+            "total_memory_gb" => CUDA.total_memory() / (1024^3),
             "device_id" => deviceid,
-            "cuda_version" => string(CUDA.version()),
+            "cuda_version" => cuda_version,
         )
     catch e
         @warn "Failed to get GPU info" exception=e
@@ -65,10 +67,16 @@ function run_julia_gpu(deviceid::Int=0, tensornetwork::String="../data/tensornet
     CUDA.attribute!(memory_pool(device()), CUDA.MEMPOOL_ATTR_RELEASE_THRESHOLD, typemax(UInt64))
     
     # Set backend
+    use_cutensor = false
     if backend == "cutensor"
         try
-            @eval using cuTENSOR
-            set_einsum_backend!(CuTensorBackend())
+            # Load cuTENSOR dynamically
+            if !isdefined(Main, :cuTENSOR)
+                @eval using cuTENSOR
+            end
+            # Use invokelatest to avoid world age issues
+            Base.invokelatest(() -> set_einsum_backend!(CuTensorBackend()))
+            use_cutensor = true
             println("Using cuTENSOR backend")
         catch e
             @warn "Failed to load cuTENSOR, using default backend" exception=e
@@ -88,9 +96,12 @@ function run_julia_gpu(deviceid::Int=0, tensornetwork::String="../data/tensornet
     
     xs = [CUDA.fill(Float32(0.5^(0.4)), (fill(2, length(ix))...,)) for ix in getixsv(optcode_loaded)]
     
+    # Helper function to call einsum (handles world age issue for cuTENSOR)
+    einsum_call = use_cutensor ? (args...) -> Base.invokelatest(optcode_loaded, args...) : (args...) -> optcode_loaded(args...)
+    
     # Warm up
     for _ in 1:3
-        optcode_loaded(xs...)
+        einsum_call(xs...)
         CUDA.synchronize()
     end
     GC.gc()
@@ -102,7 +113,7 @@ function run_julia_gpu(deviceid::Int=0, tensornetwork::String="../data/tensornet
     for _ in 1:repeat_times
         GC.gc(false)  # Minor GC only
         t0 = time()
-        res = optcode_loaded(xs...)
+        res = einsum_call(xs...)
         CUDA.synchronize()
         t1 = time()
         push!(times, t1 - t0)
@@ -113,7 +124,7 @@ function run_julia_gpu(deviceid::Int=0, tensornetwork::String="../data/tensornet
     avg_time = sum(times) / length(times)
     
     # Get result value
-    result_val = Array(optcode_loaded(xs...))[]
+    result_val = Array(einsum_call(xs...))[]
     
     println("  Result: $result_val")
     println("  Min time: $(round(min_time, digits=4))s")
@@ -132,6 +143,7 @@ function run_julia_gpu(deviceid::Int=0, tensornetwork::String="../data/tensornet
         "avg_time" => avg_time,
         "total_time" => total,
         "all_times" => times,
+        "result" => result_val,
         "contraction_complexity" => Dict("tc" => cc.tc, "sc" => cc.sc, "rwc" => cc.rwc),
         "timestamp" => Dates.format(now(), "yyyy-mm-ddTHH:MM:SS"),
         "cpu_info" => get_cpu_info(),
@@ -204,6 +216,7 @@ function run_julia_cpu(tensornetwork::String="../data/tensornetwork_permutation_
         "avg_time" => avg_time,
         "total_time" => total,
         "all_times" => times,
+        "result" => result_val,
         "contraction_complexity" => Dict("tc" => cc.tc, "sc" => cc.sc, "rwc" => cc.rwc),
         "timestamp" => Dates.format(now(), "yyyy-mm-ddTHH:MM:SS"),
         "cpu_info" => get_cpu_info(),

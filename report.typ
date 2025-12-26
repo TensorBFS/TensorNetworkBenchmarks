@@ -1,5 +1,5 @@
 #import "@preview/cetz:0.4.0": canvas, draw
-#import "@preview/cetz-plot:0.1.2": plot
+#import "@preview/cetz-plot:0.1.2": plot, chart
 #show link: set text(blue)
 
 // Read the benchmark results
@@ -54,47 +54,21 @@ This report compares the performance of *PyTorch* and *OMEinsum.jl* for tensor n
   let pytorch_gpu = gpu_results.find(r => r.framework == "pytorch")
   let pytorch_min = if pytorch_gpu != none { pytorch_gpu.min_time } else { 1.0 }
   
-  // Bar chart for GPU results
+  // Bar chart for GPU results using chart.columnchart
   figure({
+    let bar_data = ()
+    for result in gpu_results {
+      bar_data.push((get_label(result.framework, result.backend), result.min_time))
+    }
+    
     canvas(length: 1cm, {
-      let bar_data = ()
-      let labels = ()
-      let colors_list = ()
-      
-      for result in gpu_results {
-        bar_data.push(result.min_time)
-        labels.push(get_label(result.framework, result.backend))
-        colors_list.push(get_color(result.framework, result.backend))
-      }
-      
-      let max_time = calc.max(..bar_data) * 1.2
-      
-      plot.plot(
+      chart.columnchart(
         size: (12, 6),
-        x-label: none,
+        label-key: 0,
+        value-key: 1,
+        bar-width: 0.7,
         y-label: "Minimum Time (seconds)",
-        x-min: 0,
-        x-max: gpu_results.len() + 1,
-        y-min: 0,
-        y-max: max_time,
-        x-tick-step: none,
-        legend: "inner-north-east",
-        {
-          let i = 1
-          for result in gpu_results {
-            let min_time = result.min_time
-            let color = get_color(result.framework, result.backend)
-            let label = get_label(result.framework, result.backend)
-            
-            // Draw bar
-            plot.add(
-              ((i - 0.35, 0), (i - 0.35, min_time), (i + 0.35, min_time), (i + 0.35, 0)),
-              style: (stroke: color, fill: color.lighten(40%)),
-              label: label
-            )
-            i += 1
-          }
-        }
+        bar_data,
       )
     })
   }, caption: [GPU Benchmark - Minimum Execution Time])
@@ -144,37 +118,21 @@ This report compares the performance of *PyTorch* and *OMEinsum.jl* for tensor n
   let pytorch_cpu = cpu_results.find(r => r.framework == "pytorch")
   let pytorch_cpu_min = if pytorch_cpu != none { pytorch_cpu.min_time } else { 1.0 }
   
-  // Bar chart for CPU results
+  // Bar chart for CPU results using chart.columnchart
   figure({
+    let bar_data = ()
+    for result in cpu_results {
+      bar_data.push((get_label(result.framework, result.backend), result.min_time))
+    }
+    
     canvas(length: 1cm, {
-      let max_time = calc.max(..cpu_results.map(r => r.min_time)) * 1.2
-      
-      plot.plot(
+      chart.columnchart(
         size: (12, 6),
-        x-label: none,
+        label-key: 0,
+        value-key: 1,
+        bar-width: 0.7,
         y-label: "Minimum Time (seconds)",
-        x-min: 0,
-        x-max: cpu_results.len() + 1,
-        y-min: 0,
-        y-max: max_time,
-        x-tick-step: none,
-        legend: "inner-north-east",
-        {
-          let i = 1
-          for result in cpu_results {
-            let min_time = result.min_time
-            let color = get_color(result.framework, result.backend)
-            let label = get_label(result.framework, result.backend)
-            
-            // Draw bar
-            plot.add(
-              ((i - 0.35, 0), (i - 0.35, min_time), (i + 0.35, min_time), (i + 0.35, 0)),
-              style: (stroke: color, fill: color.lighten(40%)),
-              label: label
-            )
-            i += 1
-          }
-        }
+        bar_data,
       )
     })
   }, caption: [CPU Benchmark - Minimum Execution Time])
@@ -227,42 +185,20 @@ This report compares the performance of *PyTorch* and *OMEinsum.jl* for tensor n
   
   if omesum_results.len() > 0 {
     figure({
+      let bar_data = ()
+      for result in omesum_results {
+        let speedup = pytorch_min / result.min_time
+        bar_data.push(("OMEinsum (" + result.backend + ")", speedup))
+      }
+      
       canvas(length: 1cm, {
-        let speedups = omesum_results.map(r => pytorch_min / r.min_time)
-        let max_speedup = calc.max(..speedups) * 1.3
-        
-        plot.plot(
+        chart.columnchart(
           size: (10, 6),
-          x-label: none,
+          label-key: 0,
+          value-key: 1,
+          bar-width: 0.7,
           y-label: "Speedup (×)",
-          x-min: 0,
-          x-max: omesum_results.len() + 1,
-          y-min: 0,
-          y-max: calc.max(max_speedup, 1.5),
-          x-tick-step: none,
-          {
-            // Draw baseline at 1.0
-            plot.add(
-              ((0, 1), (omesum_results.len() + 1, 1)),
-              style: (stroke: (paint: gray, dash: "dashed", thickness: 1pt)),
-              label: "PyTorch baseline"
-            )
-            
-            let i = 1
-            for result in omesum_results {
-              let speedup = pytorch_min / result.min_time
-              let color = if speedup >= 1.0 { green } else { red }
-              let label = "OMEinsum (" + result.backend + ")"
-              
-              // Draw bar
-              plot.add(
-                ((i - 0.35, 0), (i - 0.35, speedup), (i + 0.35, speedup), (i + 0.35, 0)),
-                style: (stroke: color, fill: color.lighten(40%)),
-                label: label
-              )
-              i += 1
-            }
-          }
+          bar_data,
         )
       })
     }, caption: [OMEinsum Speedup vs PyTorch (GPU)])

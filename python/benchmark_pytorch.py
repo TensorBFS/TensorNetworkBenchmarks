@@ -103,7 +103,8 @@ class CLI(object):
         min_time = min(times)
         avg_time = sum(times) / len(times)
 
-        print(f"  Result: {res.item()}")
+        result_value = res.item()
+        print(f"  Result: {result_value}")
         print(f"  Min time: {min_time:.4f}s")
         print(f"  Avg time: {avg_time:.4f}s")
         print(f"  Total time: {total:.4f}s")
@@ -120,6 +121,7 @@ class CLI(object):
             "avg_time": avg_time,
             "total_time": total,
             "all_times": times,
+            "result": result_value,
             "timestamp": datetime.now().isoformat(),
             "cpu_info": get_cpu_info(),
             "gpu_info": get_gpu_info(deviceid),
@@ -155,7 +157,8 @@ class CLI(object):
         min_time = min(times)
         avg_time = sum(times) / len(times)
 
-        print(f"  Result: {res.item()}")
+        result_value = res.item()
+        print(f"  Result: {result_value}")
         print(f"  Min time: {min_time:.4f}s")
         print(f"  Avg time: {avg_time:.4f}s")
         print(f"  Total time: {total:.4f}s")
@@ -172,6 +175,7 @@ class CLI(object):
             "avg_time": avg_time,
             "total_time": total,
             "all_times": times,
+            "result": result_value,
             "timestamp": datetime.now().isoformat(),
             "cpu_info": get_cpu_info(),
             "gpu_info": None,
