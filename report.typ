@@ -6,227 +6,140 @@
 #let summary = json("results/summary.json")
 #let results = summary.results
 
-// Define colors for different frameworks/backends
-#let get_color(framework, backend) = {
-  if framework == "pytorch" {
-    if backend == "cuda" { orange }
-    else { red }
-  } else if framework == "OMEinsum" {
-    if backend == "cublas" { blue }
-    else if backend == "cutensor" { green }
-    else { purple }  // MKL/CPU
-  } else {
-    gray
-  }
-}
-
-// Create label for framework/backend
-#let get_label(framework, backend) = {
-  if framework == "pytorch" {
-    "PyTorch (" + backend + ")"
-  } else {
-    "OMEinsum (" + backend + ")"
-  }
-}
-
 // Separate GPU and CPU results
 #let gpu_results = results.filter(r => r.device == "gpu")
 #let cpu_results = results.filter(r => r.device == "cpu")
 
+// Extract hardware info
+#let gpu_result = gpu_results.find(r => r.gpu_info != none)
+#let gpu_name = if gpu_result != none and gpu_result.gpu_info != none { gpu_result.gpu_info.name } else { "Unknown GPU" }
+#let cuda_version = if gpu_result != none and gpu_result.gpu_info != none and "cuda_version" in gpu_result.gpu_info { gpu_result.gpu_info.cuda_version } else { "N/A" }
+
+#let cpu_result = results.find(r => r.cpu_info != none)
+#let cpu_name = if cpu_result != none and cpu_result.cpu_info != none and "cpu_name" in cpu_result.cpu_info { cpu_result.cpu_info.cpu_name } else if cpu_result != none and cpu_result.cpu_info != none and "processor" in cpu_result.cpu_info { cpu_result.cpu_info.processor } else { "Unknown CPU" }
+
+// Create label for framework/backend
+#let get_label(framework, backend) = {
+  if framework == "pytorch" and backend == "cuda" { "PyTorch" }
+  else if framework == "pytorch" and backend == "cpu" { "PyTorch" }
+  else if backend == "cublas" { "OMEinsum\n (CUBLAS)" }
+  else if backend == "cutensor" { "OMEinsum\n (cuTENSOR)" }
+  else if backend == "MKL" { "OMEinsum (MKL)" }
+  else { framework + " (" + backend + ")" }
+}
+
 // ============================================================================
 // Report Header
 // ============================================================================
-#align(center, text(16pt, weight: "bold")[Tensor Network Contraction Benchmarks])
+#align(center, text(18pt, weight: "bold")[Tensor Network Contraction Benchmarks])
 #align(center, text(10pt, fill: gray)[Generated: #summary.generated_at])
 
-#v(20pt)
-
-This report compares the performance of *PyTorch* and *OMEinsum.jl* for tensor network contractions. OMEinsum is tested with different backends: CUBLAS (default) and cuTENSOR.
+#v(15pt)
 
 // ============================================================================
-// GPU Benchmark Comparison
+// Hardware & Configuration
+// ============================================================================
+#box(
+  width: 100%,
+  stroke: 0.5pt + gray,
+  inset: 10pt,
+  radius: 4pt,
+)[
+  #grid(
+    columns: (1fr, 1fr),
+    gutter: 10pt,
+    [*GPU:* #gpu_name],
+    [*CUDA Version:* #cuda_version],
+    [*CPU:* #cpu_name],
+    [*Data Type:* Float32],
+  )
+]
+
+#v(15pt)
+
+// ============================================================================
+// GPU Benchmark Results - Plot
 // ============================================================================
 #if gpu_results.len() > 0 {
-  [== GPU Benchmark Comparison]
-  v(10pt)
-  
-  // Find PyTorch GPU baseline
-  let pytorch_gpu = gpu_results.find(r => r.framework == "pytorch")
-  let pytorch_min = if pytorch_gpu != none { pytorch_gpu.min_time } else { 1.0 }
-  
-  // Bar chart for GPU results using chart.columnchart
   figure({
     let bar_data = ()
+    
     for result in gpu_results {
       bar_data.push((get_label(result.framework, result.backend), result.min_time))
     }
     
     canvas(length: 1cm, {
       chart.columnchart(
-        size: (12, 6),
+        size: (10, 5),
         label-key: 0,
         value-key: 1,
-        bar-width: 0.7,
-        y-label: "Minimum Time (seconds)",
+        bar-width: 0.6,
+        y-label: "Time (seconds)",
         bar_data,
       )
     })
-  }, caption: [GPU Benchmark - Minimum Execution Time])
-  
-  v(15pt)
-  
-  // GPU Results Table
-  figure(
-    table(
-      columns: 5,
-      stroke: 0.5pt,
-      align: (left, center, center, center, center),
-      table.header(
-        [*Framework*], [*Backend*], [*Min Time (s)*], [*Avg Time (s)*], [*Speedup*]
-      ),
-      ..for result in gpu_results {
-        let speedup = pytorch_min / result.min_time
-        let speedup_str = if result.framework == "pytorch" {
-          "baseline"
-        } else {
-          str(calc.round(speedup, digits: 3)) + "×"
-        }
-        let avg_time = if "avg_time" in result { result.avg_time } else { result.min_time }
-        (
-          result.framework,
-          result.backend,
-          str(calc.round(result.min_time, digits: 4)),
-          str(calc.round(avg_time, digits: 4)),
-          speedup_str
-        )
-      }
-    ),
-    caption: [GPU Benchmark Results]
-  )
+  }, caption: [GPU Benchmark - Minimum Execution Time (lower is better)])
 }
 
-#v(20pt)
+#v(10pt)
 
 // ============================================================================
-// CPU Benchmark Comparison
+// Results Table
 // ============================================================================
-#if cpu_results.len() > 0 {
-  [== CPU Benchmark Comparison]
-  v(10pt)
-  
-  // Find PyTorch CPU baseline
-  let pytorch_cpu = cpu_results.find(r => r.framework == "pytorch")
-  let pytorch_cpu_min = if pytorch_cpu != none { pytorch_cpu.min_time } else { 1.0 }
-  
-  // Bar chart for CPU results using chart.columnchart
-  figure({
-    let bar_data = ()
-    for result in cpu_results {
-      bar_data.push((get_label(result.framework, result.backend), result.min_time))
-    }
-    
-    canvas(length: 1cm, {
-      chart.columnchart(
-        size: (12, 6),
-        label-key: 0,
-        value-key: 1,
-        bar-width: 0.7,
-        y-label: "Minimum Time (seconds)",
-        bar_data,
-      )
-    })
-  }, caption: [CPU Benchmark - Minimum Execution Time])
-  
-  v(15pt)
-  
-  // CPU Results Table
-  figure(
-    table(
-      columns: 5,
-      stroke: 0.5pt,
-      align: (left, center, center, center, center),
-      table.header(
-        [*Framework*], [*Backend*], [*Min Time (s)*], [*Avg Time (s)*], [*Speedup*]
-      ),
-      ..for result in cpu_results {
-        let speedup = pytorch_cpu_min / result.min_time
-        let speedup_str = if result.framework == "pytorch" {
-          "baseline"
-        } else {
-          str(calc.round(speedup, digits: 3)) + "×"
-        }
-        let avg_time = if "avg_time" in result { result.avg_time } else { result.min_time }
-        (
-          result.framework,
-          result.backend,
-          str(calc.round(result.min_time, digits: 4)),
-          str(calc.round(avg_time, digits: 4)),
-          speedup_str
-        )
-      }
-    ),
-    caption: [CPU Benchmark Results]
-  )
-}
-
-#v(20pt)
-
-// ============================================================================
-// Speedup Comparison (GPU)
-// ============================================================================
-#if gpu_results.len() > 1 {
-  [== Speedup Analysis]
-  v(10pt)
-  
+#{
   let pytorch_gpu = gpu_results.find(r => r.framework == "pytorch")
-  let pytorch_min = if pytorch_gpu != none { pytorch_gpu.min_time } else { 1.0 }
+  let pytorch_gpu_min = if pytorch_gpu != none { pytorch_gpu.min_time } else { 1.0 }
   
-  let omesum_results = gpu_results.filter(r => r.framework == "OMEinsum")
-  
-  if omesum_results.len() > 0 {
-    figure({
-      let bar_data = ()
-      for result in omesum_results {
-        let speedup = pytorch_min / result.min_time
-        bar_data.push(("OMEinsum (" + result.backend + ")", speedup))
-      }
-      
-      canvas(length: 1cm, {
-        chart.columnchart(
-          size: (10, 6),
-          label-key: 0,
-          value-key: 1,
-          bar-width: 0.7,
-          y-label: "Speedup (×)",
-          bar_data,
+  figure(
+    table(
+      columns: 5,
+      stroke: 0.5pt,
+      align: (left, left, center, center, center),
+      table.header(
+        [*Device*], [*Framework*], [*Min Time (s)*], [*Avg Time (s)*], [*Speedup*]
+      ),
+      // GPU results
+      ..for result in gpu_results {
+        let speedup = pytorch_gpu_min / result.min_time
+        let speedup_str = if result.framework == "pytorch" {
+          "baseline"
+        } else if speedup >= 1.0 {
+          str(calc.round(speedup, digits: 2)) + "× faster"
+        } else {
+          str(calc.round(1.0/speedup, digits: 2)) + "× slower"
+        }
+        let avg_time = if "avg_time" in result { result.avg_time } else { result.min_time }
+        (
+          "GPU",
+          get_label(result.framework, result.backend),
+          str(calc.round(result.min_time, digits: 4)),
+          str(calc.round(avg_time, digits: 4)),
+          speedup_str
         )
-      })
-    }, caption: [OMEinsum Speedup vs PyTorch (GPU)])
-    
-    v(10pt)
-    
-    [
-    - Values above 1.0× indicate OMEinsum is faster than PyTorch
-    - Values below 1.0× indicate PyTorch is faster
-    ]
-  }
+      },
+      // CPU results - only show time, no speedup
+      ..for result in cpu_results {
+        let avg_time = if "avg_time" in result { result.avg_time } else { result.min_time }
+        (
+          "CPU",
+          get_label(result.framework, result.backend),
+          str(calc.round(result.min_time, digits: 4)),
+          str(calc.round(avg_time, digits: 4)),
+          "—"
+        )
+      }
+    ),
+    caption: [Benchmark Results]
+  )
 }
 
-#v(20pt)
+#v(15pt)
 
 // ============================================================================
 // Notes
 // ============================================================================
-[== Notes]
-
-- *Tensor Network*: Random regular graph with 220 nodes and degree 3
-- *Contraction Order*: Optimized using TreeSA algorithm
-- *Data Type*: Float32
-- All benchmarks use the same optimized contraction order
-- GPU benchmarks synchronize CUDA operations for accurate timing
-- Julia garbage collection is minimized during benchmarks
-
-#v(10pt)
-
-For more details, see the #link("https://github.com/under-Peter/OMEinsum.jl/issues/133")[original discussion].
-
+#text(size: 9pt)[
+  *Notes:* Tensor network has 220 nodes with degree 3. Contraction order optimized using TreeSA algorithm. GPU benchmarks synchronize CUDA operations for accurate timing.
+  
+  For more details, see the #link("https://github.com/under-Peter/OMEinsum.jl/issues/133")[original discussion].
+]
