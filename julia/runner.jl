@@ -90,7 +90,7 @@ function run_julia_gpu(deviceid::Int=0, tensornetwork::String="../data/tensornet
     
     # Warm up
     for _ in 1:3
-        optcode_loaded(xs...; active_free=false)
+        optcode_loaded(xs...)
         CUDA.synchronize()
     end
     GC.gc()
@@ -102,7 +102,7 @@ function run_julia_gpu(deviceid::Int=0, tensornetwork::String="../data/tensornet
     for _ in 1:repeat_times
         GC.gc(false)  # Minor GC only
         t0 = time()
-        res = optcode_loaded(xs...; active_free=false)
+        res = optcode_loaded(xs...)
         CUDA.synchronize()
         t1 = time()
         push!(times, t1 - t0)
@@ -113,7 +113,7 @@ function run_julia_gpu(deviceid::Int=0, tensornetwork::String="../data/tensornet
     avg_time = sum(times) / length(times)
     
     # Get result value
-    result_val = Array(optcode_loaded(xs...; active_free=false))[]
+    result_val = Array(optcode_loaded(xs...))[]
     
     println("  Result: $result_val")
     println("  Min time: $(round(min_time, digits=4))s")
