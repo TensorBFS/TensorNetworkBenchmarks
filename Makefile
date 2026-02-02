@@ -4,31 +4,35 @@ JL = julia --project=. --threads 1
 DEVICE_ID ?= 0
 TENSORNETWORK ?= tensornetwork_permutation_optimized.json
 REPEAT ?= 1
+NTHREADS ?= 1
 
 # Directories
 PYTHON_DIR = python
 JULIA_DIR = julia
+RUST_DIR = rust
 DATA_DIR = data
 RESULTS_DIR = results
 FIGURES_DIR = figures
 
-.PHONY: help init init-python init-julia update update-python update-julia run-all run-pytorch-gpu run-pytorch-cpu run-julia-gpu run-julia-cpu run-julia-cutensor clean clean-results summary report figures
+.PHONY: help init init-python init-julia init-rust update update-python update-julia run-all run-pytorch-gpu run-pytorch-cpu run-julia-gpu run-julia-cpu run-julia-cutensor run-rust-cpu clean clean-results summary report figures
 
 help:
 	@echo "TensorNetworkBenchmarks - Makefile"
 	@echo ""
 	@echo "Targets:"
-	@echo "  init              - Initialize Julia and Python environments"
+	@echo "  init              - Initialize Julia, Python, and Rust environments"
 	@echo "  init-julia        - Initialize Julia environment"
 	@echo "  init-python       - Initialize Python environment (via uv)"
+	@echo "  init-rust         - Build Rust benchmark (release mode)"
 	@echo "  update            - Update all dependencies"
 	@echo ""
-	@echo "  run-all           - Run all benchmarks (PyTorch + OMEinsum all backends)"
+	@echo "  run-all           - Run all benchmarks (PyTorch + OMEinsum + omeinsum-rs)"
 	@echo "  run-pytorch-gpu   - Run PyTorch GPU benchmark"
 	@echo "  run-pytorch-cpu   - Run PyTorch CPU benchmark"
 	@echo "  run-julia-gpu     - Run OMEinsum GPU benchmark (CUBLAS)"
 	@echo "  run-julia-cpu     - Run OMEinsum CPU benchmark"
 	@echo "  run-julia-cutensor - Run OMEinsum GPU benchmark (cuTENSOR)"
+	@echo "  run-rust-cpu      - Run omeinsum-rs CPU benchmark"
 	@echo ""
 	@echo "  summary           - Generate summary.json from all results"
 	@echo "  report            - Generate PDF report with plots (using Typst)"
@@ -39,8 +43,9 @@ help:
 	@echo "  DEVICE_ID=$(DEVICE_ID)           - CUDA device ID"
 	@echo "  TENSORNETWORK=$(TENSORNETWORK)"
 	@echo "  REPEAT=$(REPEAT)                 - Number of repetitions"
+	@echo "  NTHREADS=$(NTHREADS)             - Number of threads (for CPU benchmarks)"
 
-init: init-julia init-python
+init: init-julia init-python init-rust
 
 init-julia:
 	@echo "Initializing Julia environment..."
@@ -49,6 +54,10 @@ init-julia:
 init-python:
 	@echo "Initializing Python environment via uv..."
 	cd $(PYTHON_DIR) && uv sync
+
+init-rust:
+	@echo "Building Rust benchmark (release mode)..."
+	cd $(RUST_DIR) && cargo build --release
 
 update: update-julia update-python
 
@@ -64,7 +73,7 @@ update-python:
 $(RESULTS_DIR):
 	mkdir -p $(RESULTS_DIR)
 
-run-all: run-pytorch-gpu run-pytorch-cpu run-julia-gpu run-julia-cpu run-julia-cutensor
+run-all: run-pytorch-gpu run-pytorch-cpu run-julia-gpu run-julia-cpu run-julia-cutensor run-rust-cpu
 	@echo ""
 	@echo "All benchmarks completed!"
 	@echo "Run 'make summary' to generate summary.json"
@@ -89,6 +98,10 @@ run-julia-cpu: $(RESULTS_DIR)
 run-julia-cutensor: $(RESULTS_DIR)
 	@echo "Running OMEinsum GPU benchmark (cuTENSOR backend)..."
 	cd $(JULIA_DIR) && $(JL) -e 'include("runner.jl"); run_julia_gpu($(DEVICE_ID), "../$(DATA_DIR)/$(TENSORNETWORK)", $(REPEAT), "cutensor")'
+
+run-rust-cpu: $(RESULTS_DIR)
+	@echo "Running omeinsum-rs CPU benchmark..."
+	cd $(RUST_DIR) && ./target/release/benchmark --tensornetwork ../$(DATA_DIR)/$(TENSORNETWORK) --repeat-times $(REPEAT) --nthreads $(NTHREADS) --output-dir ../$(RESULTS_DIR)
 
 summary: $(RESULTS_DIR)
 	@echo "Generating summary from all results..."
